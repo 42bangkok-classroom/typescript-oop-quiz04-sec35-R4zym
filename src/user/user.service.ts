@@ -58,8 +58,7 @@ export class UserService {
   create(dto: CreateUserDto): IUser {
     const users = this.findAll();
 
-    const lastId =
-      users.length > 0 ? Math.max(...users.map((u) => parseInt(u.id))) : 0;
+    const lastId = users.length > 0 ? Math.max(...users.map((u) => Number(u.id) || 0)) : 0;
 
     const newUser: IUser = {
       id: (lastId + 1).toString(),
