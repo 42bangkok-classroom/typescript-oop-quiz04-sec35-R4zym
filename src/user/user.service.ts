@@ -2,19 +2,19 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
+import { join } from 'path';
 // import fs from 'fs';
 @Injectable()
 export class UserService {
-  private readonly UserPath = path.resolve(__dirname, '../data/students.json');
-
-  private readJsonFile(filePath: string): string[] {
-    try {
-      const data = fs.readFileSync(filePath, 'utf-8');
-      return JSON.parse(data) as string[];
-    } catch (error) {
-      console.error('Error reading JSON file:', error);
-      return [] as string[];
+  private readonly UserPath = join(process.cwd(),"users.json")
+  
+  private readJsonFile<T>(filePath: string): T[] {
+    if (!fs.existsSync(filePath)) {
+      fs.writeFileSync(filePath, '[]', 'utf8');
+      return [];
     }
+    const data = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(data) as T[];
   }
 
   test(): string[] {
