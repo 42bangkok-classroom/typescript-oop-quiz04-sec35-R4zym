@@ -1,10 +1,11 @@
 // import path from 'path/win32';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
 //import * as path from 'path';
 import { join } from 'path';
 // import fs from 'fs';
 import { IUser } from './user.interface';
+import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class UserService {
@@ -25,5 +26,27 @@ export class UserService {
 
   findAll(): IUser[] {
     return this.readJsonFile<IUser>(this.UserPath);
+  }
+
+  async findOne(id: string, fields?: string[]): Promise<Partial<IUser>> {
+    const users = await this.findAll();
+    const user = users.find((u) => u.id === id);
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (!fields || fields.length === 0) {
+    return user;
+  }
+
+  const filteredUser: Partial<IUser> = {};
+  fields.forEach((field) => {
+    if (user[field] !== undefined) {
+      filteredUser[field] = user[field];
+    }
+  });
+
+    return filteredUser;
   }
 }
