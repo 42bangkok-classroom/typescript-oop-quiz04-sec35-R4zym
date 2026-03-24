@@ -12,16 +12,16 @@ export class UserController {
   }
 
   @Get()
-  async findAll(): Promise<IUser[]> {
-    return await this.userService.findAll();
+  findAll(): IUser[] {
+    return this.userService.findAll();
   }
 
   @Get(':id')
-  async findOne(
+  findOne(
     @Param('id') id: string,
     @Query('fields') fields?: string,
-  ): Promise<Partial<IUser>> {
+  ) {
     const fieldArray = fields ? fields.split(',') : undefined;
-    return await this.userService.findOne(id, fieldArray);
+    return this.userService.findOne(id, fieldArray);
   }
 }

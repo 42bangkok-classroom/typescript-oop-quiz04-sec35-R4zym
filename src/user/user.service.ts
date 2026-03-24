@@ -5,7 +5,6 @@ import * as fs from 'fs';
 import { join } from 'path';
 // import fs from 'fs';
 import { IUser } from './user.interface';
-import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class UserService {
@@ -28,8 +27,8 @@ export class UserService {
     return this.readJsonFile<IUser>(this.UserPath);
   }
 
-  async findOne(id: string, fields?: string[]): Promise<Partial<IUser>> {
-    const users = await this.findAll();
+  findOne(id: string, fields?: string[]): Partial<IUser> {
+    const users = this.findAll();
     const user = users.find((u) => u.id === id);
 
     if (!user) {
