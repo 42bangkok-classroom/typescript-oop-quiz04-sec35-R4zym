@@ -24,6 +24,6 @@ export class UserService {
   }
 
   async findAll(): Promise<IUser[]> {
-    return this.readJsonFile<IUser>(this.UserPath);
+    return await this.readJsonFile<IUser>(this.UserPath);
   }
 }
