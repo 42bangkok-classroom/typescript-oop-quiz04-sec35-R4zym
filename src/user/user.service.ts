@@ -1,5 +1,7 @@
-import path from 'path/win32';
-import fs from 'fs';
+// import path from 'path/win32';
+import * as fs from 'fs';
+import * as path from 'path';
+// import fs from 'fs';
 
 export class UserService {
   private readonly UserPath = path.resolve(__dirname, '../data/students.json');
