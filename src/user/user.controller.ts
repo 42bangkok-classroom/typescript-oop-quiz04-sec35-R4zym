@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query} from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { IUser } from './user.interface';
 
@@ -17,8 +17,11 @@ export class UserController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string, @Query('fields') fields?: string): Promise<Partial<IUser>>{
-  const fieldArray = fields ? fields.split(',') : undefined;
+  async findOne(
+    @Param('id') id: string,
+    @Query('fields') fields?: string,
+  ): Promise<Partial<IUser>> {
+    const fieldArray = fields ? fields.split(',') : undefined;
     return await this.userService.findOne(id, fieldArray);
   }
 }

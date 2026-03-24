@@ -37,15 +37,15 @@ export class UserService {
     }
 
     if (!fields || fields.length === 0) {
-    return user;
-  }
-
-  const filteredUser: Partial<IUser> = {};
-  fields.forEach((field) => {
-    if (user[field] !== undefined) {
-      filteredUser[field] = user[field];
+      return user;
     }
-  });
+
+    const filteredUser: Partial<IUser> = {};
+    fields.forEach((field) => {
+      if (user[field] !== undefined) {
+        filteredUser[field] = user[field];
+      }
+    });
 
     return filteredUser;
   }
