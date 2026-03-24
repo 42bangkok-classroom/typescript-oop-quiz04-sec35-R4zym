@@ -4,6 +4,8 @@ import * as fs from 'fs';
 //import * as path from 'path';
 import { join } from 'path';
 // import fs from 'fs';
+import { IUser } from './user.interface';
+
 @Injectable()
 export class UserService {
   private readonly UserPath = join(process.cwd(), 'users.json');
@@ -21,7 +23,7 @@ export class UserService {
     return [];
   }
 
-  findAll(): string[] {
-    return this.readJsonFile(this.UserPath);
+  findAll(): IUser[] {
+    return this.readJsonFile<IUser>(this.UserPath);
   }
 }
