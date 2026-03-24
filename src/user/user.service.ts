@@ -40,7 +40,8 @@ export class UserService {
     }
 
     const filteredUser: Partial<IUser> = {};
-    fields.forEach((field) => {
+    fields.forEach((f) => {
+      const field = f as keyof IUser;
       if (user[field] !== undefined) {
         filteredUser[field] = user[field];
       }
