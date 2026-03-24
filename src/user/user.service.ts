@@ -4,13 +4,14 @@ import fs from 'fs';
 export class UserService {
   private readonly UserPath = path.resolve(__dirname, '../data/students.json');
 
-  private readJsonFile<User>(UserPath: string): User[] {
-    if (!fs.existsSync(UserPath)) {
-      fs.writeFileSync(UserPath, JSON.stringify([]));
+  private readJsonFile(filePath: string): string[] {
+    try {
+      const data = fs.readFileSync(filePath, 'utf-8');
+      return JSON.parse(data);
+    } catch (error) {
+      console.error('Error reading JSON file:', error);
       return [];
     }
-    const data = fs.readFileSync(UserPath, 'utf-8');
-    return JSON.parse(data) as User[];
   }
 
   test(): string[] {

@@ -6,6 +6,6 @@ export class AppService {
   constructor(private readonly userService: UserService) {}
 
   getHello(): string {
-    return "Welcome to NestJS!";
+    return 'Welcome to NestJS!';
   }
 }
