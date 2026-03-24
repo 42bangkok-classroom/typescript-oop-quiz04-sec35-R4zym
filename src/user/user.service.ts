@@ -20,6 +20,10 @@ export class UserService {
     return JSON.parse(data) as T[];
   }
 
+  private writeJsonFile(filePath: string, data: IUser[]): void {
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+  }
+
   test(): string[] {
     return [];
   }
@@ -63,7 +67,7 @@ export class UserService {
     };
 
     users.push(newUser);
-    fs.writeFileSync(this.UserPath, JSON.stringify(users, null, 2), 'utf8');
+    this.writeJsonFile(this.UserPath, users);
 
     return newUser;
   }
