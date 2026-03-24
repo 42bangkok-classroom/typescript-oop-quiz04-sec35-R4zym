@@ -6,8 +6,8 @@ import { join } from 'path';
 // import fs from 'fs';
 @Injectable()
 export class UserService {
-  private readonly UserPath = join(process.cwd(),"users.json")
-  
+  private readonly UserPath = join(process.cwd(), 'users.json');
+
   private readJsonFile<T>(filePath: string): T[] {
     if (!fs.existsSync(filePath)) {
       fs.writeFileSync(filePath, '[]', 'utf8');
