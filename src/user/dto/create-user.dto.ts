@@ -10,7 +10,7 @@ export class CreateUserDto {
   lastname: string;
 
   @IsEmail()
-  @IsNotEmpty({ message: 'email should not be empty' })
+  @IsNotEmpty()
   email: string;
 
   @IsString()
