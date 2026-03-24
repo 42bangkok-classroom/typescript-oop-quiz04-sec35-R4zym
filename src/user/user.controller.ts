@@ -11,8 +11,8 @@ export class UserController {
     return this.userService.test();
   }
 
-  @Get('users')
-  findAll(): IUser[] {
-    return this.userService.findAll();
+  @Get()
+  async findAll(): Promise<IUser[]> {
+    return await this.userService.findAll();
   }
 }
