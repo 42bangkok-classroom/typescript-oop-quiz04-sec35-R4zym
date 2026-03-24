@@ -5,6 +5,7 @@ import * as fs from 'fs';
 import { join } from 'path';
 // import fs from 'fs';
 import { IUser } from './user.interface';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
@@ -48,5 +49,22 @@ export class UserService {
     });
 
     return filteredUser;
+  }
+
+  create(dto: CreateUserDto): IUser {
+    const users = this.findAll();
+
+    const lastId =
+      users.length > 0 ? Math.max(...users.map((u) => parseInt(u.id))) : 0;
+
+    const newUser: IUser = {
+      id: (lastId + 1).toString(),
+      ...dto,
+    };
+
+    users.push(newUser);
+    fs.writeFileSync(this.UserPath, JSON.stringify(users, null, 2), 'utf8');
+
+    return newUser;
   }
 }
