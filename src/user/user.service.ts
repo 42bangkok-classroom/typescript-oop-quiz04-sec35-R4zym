@@ -23,7 +23,7 @@ export class UserService {
     return [];
   }
 
-  async findAll(): Promise<IUser[]> {
-    return await this.readJsonFile<IUser>(this.UserPath);
+  findAll(): IUser[] {
+    return this.readJsonFile<IUser>(this.UserPath);
   }
 }
