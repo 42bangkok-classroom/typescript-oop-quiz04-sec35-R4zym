@@ -8,7 +8,7 @@ import { IUser } from './user.interface';
 
 @Injectable()
 export class UserService {
-  private readonly UserPath = join(process.cwd(), 'users.json');
+  private readonly UserPath = join(process.cwd(), 'data', 'users.json');
 
   private readJsonFile<T>(filePath: string): T[] {
     if (!fs.existsSync(filePath)) {
